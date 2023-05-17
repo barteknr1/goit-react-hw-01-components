@@ -4,12 +4,18 @@ import FriendListItem from './FriendListItem';
 
 const FriendList = ({ friends }) => (
   <ul className={css.friendList}>
-    {friends.map(FriendListItem)}
-</ul>
+    {friends.map(({ avatar, name, isOnline, id }) => (
+    <FriendListItem key={id} avatar={avatar} id={id} isOnline={isOnline} name={name} />))}
+  </ul>
 )
 
 FriendList.propTypes = {
-  friends: PropTypes.array,
-}
+  friends: PropTypes.arrayOf(PropTypes.shape({
+    avatar: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    isOnline: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired).isRequired,
+};
 
 export default FriendList

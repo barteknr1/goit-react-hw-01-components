@@ -5,7 +5,7 @@ const Statistics = ({
     title,
     stats}) => (
     <section className={css.statistics}>
-        <h2 className={css.title}>{title}</h2>
+        {!!title && <h2 className={css.title}>{title}</h2>}
 
         <ul className={css.statList}>
             {stats.map(item => (
@@ -20,7 +20,12 @@ const Statistics = ({
 );
 
 Statistics.propTypes = {
-    stats: PropTypes.array,
+    title: PropTypes.string,
+    stats: PropTypes.arrayOf({
+        id: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        percentage: PropTypes.number.isRequired,
+    }.isRequired).isRequired,
 };
 
 export default Statistics
